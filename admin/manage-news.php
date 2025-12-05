@@ -1,87 +1,104 @@
 <?php
+// manage-news.php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
-require_once "db_connect.php";
+require_once "db_connect.php"; // must create $link (mysqli)
 
-// Check if the user is logged in, if not then redirect to login page
+// Redirect if not logged in
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
 }
 
-// Define variables and initialize with empty values for News Articles
+/* -------------------------
+   Initialize variables
+   ------------------------- */
 $title = $content = $posted_date = "";
 $title_err = $content_err = $posted_date_err = "";
-$image_path_err = ""; // For news images
+$image_path_err = "";
 $success_msg = $error_msg = "";
 
-// Set default posted date for news form
 $default_posted_date = date('Y-m-d');
 
-// Processing form data when form is submitted for adding a news article
-if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_news'])){
-    // Validate title
-    if(empty(trim($_POST["title"]))){
-        $title_err = "Please enter a title.";
-    } else{
-        $title = trim($_POST["title"]);
-    }
+/* -------------------------
+   Handle form submission
+   ------------------------- */
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_news'])){
 
-    // Validate content
-    if(empty(trim($_POST["content"]))){
-        $content_err = "Please enter content.";
-    } else{
-        $content = trim($_POST["content"]);
-    }
+    // Trim inputs
+    $title = trim($_POST['title'] ?? '');
+    $content = trim($_POST['content'] ?? '');
+    $posted_date = trim($_POST['posted_date'] ?? '');
 
-    // Validate posted date
-    if(empty(trim($_POST["posted_date"]))){
-        $posted_date_err = "Please enter a date.";
-    } else{
-        $posted_date = trim($_POST["posted_date"]);
-    }
+    // Validate
+    if($title === '') $title_err = "Please enter a title.";
+    if($content === '') $content_err = "Please enter content.";
+    if($posted_date === '') $posted_date_err = "Please enter a date.";
 
-    // Validate and upload images
+    // Image upload handling
     $news_image_paths = [];
     $upload_errors = [];
+    $upload_dir = __DIR__ . "/../assets/images/"; // filesystem path
+    $upload_dir_rel = "assets/images/"; // path stored in DB (relative to project root used elsewhere)
 
-    if(isset($_FILES["images"]) && !empty(array_filter($_FILES['images']['name']))){
-        $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
-        
-        foreach($_FILES['images']['name'] as $key=>$val){
-            $filename = $_FILES["images"]["name"][$key];
-            $filetype = $_FILES["images"]["type"][$key];
-            $filesize = $_FILES["images"]["size"][$key];
-            $tmp_name = $_FILES["images"]["tmp_name"][$key];
+    if(!is_dir($upload_dir)){
+        if(!mkdir($upload_dir, 0755, true)){
+            $upload_errors[] = "Unable to create image upload directory.";
+        }
+    }
 
-            $current_image_error = "";
+    // Allowed MIME types & extensions
+    $allowed_mimes = [
+        'jpg' => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'png' => 'image/png',
+        'gif' => 'image/gif'
+    ];
 
-            // Verify file extension
-            $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            if(!array_key_exists($ext, $allowed)) {
-                $current_image_error = "Invalid file format for " . $filename . ".";
+    if(isset($_FILES['images']) && !empty(array_filter($_FILES['images']['name']))){
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+        foreach($_FILES['images']['name'] as $key => $originalName){
+            $tmp_name = $_FILES['images']['tmp_name'][$key];
+            $filesize = $_FILES['images']['size'][$key];
+            $error = $_FILES['images']['error'][$key];
+
+            if($error !== UPLOAD_ERR_OK){
+                $upload_errors[] = "Error uploading file: " . htmlspecialchars($originalName);
+                continue;
             }
-        
+
+            // Validate size (5MB)
             $maxsize = 5 * 1024 * 1024;
-            if($filesize > $maxsize) {
-                $current_image_error = "File " . $filename . " is larger than the allowed limit.";
+            if($filesize > $maxsize){
+                $upload_errors[] = "File " . htmlspecialchars($originalName) . " is larger than allowed (5MB).";
+                continue;
             }
-            
-            if(empty($current_image_error)){ // Only proceed if no errors so far for this file
-                $new_filename = uniqid() . "-" . $filename;
-                if(move_uploaded_file($tmp_name, "../assets/images/" . $new_filename)){
-                    $news_image_paths[] = "assets/images/" . $new_filename;
-                } else {
-                    $current_image_error = "Problem uploading " . $filename . ".";
-                }
+
+            // Validate MIME using finfo
+            $mimeType = $finfo->file($tmp_name);
+            $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+            if(!in_array($mimeType, $allowed_mimes) || !array_key_exists($ext, $allowed_mimes)){
+                $upload_errors[] = "Invalid file type for " . htmlspecialchars($originalName) . ".";
+                continue;
             }
-            
-            if(!empty($current_image_error)){
-                $upload_errors[] = $current_image_error;
+
+            // Sanitize original name and build unique filename
+            $safeBase = preg_replace("/[^A-Z0-9._-]/i", "-", pathinfo($originalName, PATHINFO_FILENAME));
+            $newFilename = uniqid('img_', true) . "-" . $safeBase . "." . $ext;
+            $destination = $upload_dir . $newFilename;
+
+            if(!move_uploaded_file($tmp_name, $destination)){
+                $upload_errors[] = "Failed to move uploaded file " . htmlspecialchars($originalName) . ".";
+                continue;
             }
+
+            // File saved successfully; add relative path for DB
+            $news_image_paths[] = $upload_dir_rel . $newFilename;
         }
     } else {
         $upload_errors[] = "Please select at least one image.";
@@ -91,51 +108,77 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_news'])){
         $image_path_err = implode("<br>", $upload_errors);
     }
 
-    // Check input errors before inserting in database
+    // Only insert when no validation errors
     if(empty($title_err) && empty($content_err) && empty($posted_date_err) && empty($image_path_err)){
-        
         $sql = "INSERT INTO news (title, content, posted_date, image_paths, image_path) VALUES (?, ?, ?, ?, ?)";
-         
+
         if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "sssss", $param_title, $param_content, $param_posted_date, $param_image_paths, $param_image_path);
-            
             $param_title = $title;
             $param_content = $content;
             $param_posted_date = $posted_date;
             $param_image_paths = json_encode($news_image_paths);
-            $param_image_path = $news_image_paths[0] ?? ""; // Use the first uploaded image as the main image_path
-            
+            $param_image_path = $news_image_paths[0] ?? "";
+
+            mysqli_stmt_bind_param($stmt, "sssss", $param_title, $param_content, $param_posted_date, $param_image_paths, $param_image_path);
+
             if(mysqli_stmt_execute($stmt)){
                 $_SESSION['success_msg'] = "News article added successfully.";
-                header("location: manage-news.php"); // Redirect to this page
+                mysqli_stmt_close($stmt);
+                header("location: manage-news.php");
                 exit();
-            } else{
-                $error_msg = "Database error (News Article): " . mysqli_error($link);
+            } else {
+                $error_msg = "Database error (News Article): " . htmlspecialchars(mysqli_error($link));
+                mysqli_stmt_close($stmt);
             }
-            mysqli_stmt_close($stmt);
+        } else {
+            $error_msg = "Database prepare failed: " . htmlspecialchars(mysqli_error($link));
         }
     } else {
-        $error_msg = "Please fix the validation errors for the news article and try again: " . $title_err . " " . $content_err . " " . $posted_date_err . " " . $image_path_err;
+        $error_msg = "Please fix the validation errors and try again.";
     }
 }
 
+// Show session success message (if any)
 if(isset($_SESSION['success_msg'])){
     $success_msg = $_SESSION['success_msg'];
     unset($_SESSION['success_msg']);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Manage News Articles</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Minimal admin styles (you can keep your admin-style.css or merge these) -->
     <link rel="stylesheet" href="admin-style.css">
     <style>
-        .image-preview-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-        .image-preview { position: relative; width: 150px; height: 150px; }
-        .image-preview img { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
-        .remove-image { position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; cursor: pointer; width: 25px; height: 25px; font-size: 16px; }
+        /* Small admin styles to ensure consistent preview + table thumbnails */
+        .admin-wrapper { max-width: 1100px; margin: 30px auto; padding: 20px; font-family: Arial, sans-serif; }
+        .admin-header { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:20px; }
+        .admin-header h1 { margin:0; font-size:1.5rem; color:#222; }
+        .btn { display:inline-block; padding:10px 14px; border-radius:6px; background:#2563eb; color:#fff; text-decoration:none; }
+        .btn.btn-danger { background:#ef4444; }
+        .form-container { background:#fff; padding:20px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); margin-bottom:30px; }
+        .form-group { margin-bottom:15px; }
+        label { display:block; margin-bottom:6px; color:#333; font-weight:600; }
+        input[type="text"], input[type="date"], textarea, input[type="file"] { width:100%; padding:10px 12px; border:1px solid #ddd; border-radius:6px; font-size:14px; }
+        textarea { min-height:120px; resize:vertical; }
+        .help-block { color:#d9534f; margin-top:6px; display:block; font-size:0.95rem; }
+        .image-preview-container { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+        .image-preview { position:relative; width:140px; height:140px; border-radius:6px; overflow:hidden; background:#f5f5f5; display:flex; align-items:center; justify-content:center; }
+        .image-preview img { width:100%; height:100%; object-fit:cover; display:block; }
+        .remove-image { position:absolute; top:6px; right:6px; background:rgba(0,0,0,0.6); color:#fff; border:none; width:26px; height:26px; border-radius:50%; cursor:pointer; font-size:16px; }
+        .alert { padding:12px 14px; border-radius:6px; margin-bottom:18px; }
+        .alert-success { background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
+        .alert-danger { background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; }
+
+        table.table { width:100%; border-collapse:collapse; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+        table.table th, table.table td { padding:12px 14px; border-bottom:1px solid #f1f1f1; text-align:left; vertical-align:middle; }
+        table.table th { background:#fafafa; font-weight:700; color:#333; }
+        table.table img.thumb { width:100px; height:70px; object-fit:cover; border-radius:6px; margin-right:6px; }
+        .actions .btn { margin-right:6px; }
+        .has-error input, .has-error textarea { border-color:#dc3545; }
     </style>
 </head>
 <body>
@@ -144,145 +187,163 @@ if(isset($_SESSION['success_msg'])){
             <h1>Manage News Articles</h1>
             <div>
                 <a href="dashboard.php" class="btn">Dashboard</a>
-                <a href="logout.php" class="btn">Logout</a>
+                <a href="logout.php" class="btn btn-danger">Logout</a>
             </div>
         </div>
 
-        <?php 
-        if(!empty($success_msg)){
-            echo '<div class="alert alert-success" style="padding: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 20px;">' . $success_msg . '</div>';
-        }        
-        if(!empty($error_msg)){
-            echo '<div class="alert alert-danger" style="padding: 15px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 20px;">' . $error_msg . '</div>';
-        }        
-        ?>
+        <?php if(!empty($success_msg)): ?>
+            <div class="alert alert-success"><?php echo $success_msg; ?></div>
+        <?php endif; ?>
+
+        <?php if(!empty($error_msg)): ?>
+            <div class="alert alert-danger"><?php echo $error_msg; ?></div>
+        <?php endif; ?>
 
         <div class="form-container">
-            <h2>Add New News Article</h2>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+            <h2 style="margin-top:0;">Add New News Article</h2>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data" novalidate>
                 <input type="hidden" name="add_news" value="1">
                 <div class="form-group <?php echo (!empty($title_err)) ? 'has-error' : ''; ?>">
-                    <label>Title</label>
-                    <input type="text" name="title" class="form-control" value="<?php echo $title; ?>">
+                    <label for="title">Title</label>
+                    <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title); ?>">
                     <span class="help-block"><?php echo $title_err; ?></span>
                 </div>
+
                 <div class="form-group <?php echo (!empty($content_err)) ? 'has-error' : ''; ?>">
-                    <label>Content</label>
-                    <textarea name="content" class="form-control"><?php echo $content; ?></textarea>
+                    <label for="content">Content</label>
+                    <textarea id="content" name="content"><?php echo htmlspecialchars($content); ?></textarea>
                     <span class="help-block"><?php echo $content_err; ?></span>
                 </div>
+
                 <div class="form-group <?php echo (!empty($posted_date_err)) ? 'has-error' : ''; ?>">
-                    <label>Posted Date</label>
-                    <input type="date" name="posted_date" class="form-control" value="<?php echo $default_posted_date; ?>">
+                    <label for="posted_date">Posted Date</label>
+                    <input id="posted_date" type="date" name="posted_date" value="<?php echo htmlspecialchars($default_posted_date); ?>">
                     <span class="help-block"><?php echo $posted_date_err; ?></span>
                 </div>
+
                 <div class="form-group <?php echo (!empty($image_path_err)) ? 'has-error' : ''; ?>">
-                    <label>Images</label>
-                    <input type="file" id="images" name="images[]" class="form-control" multiple>
+                    <label for="images">Images (max 5MB each)</label>
+                    <input id="images" type="file" name="images[]" multiple accept="image/*">
                     <div class="image-preview-container" id="image-preview-container"></div>
                     <span class="help-block"><?php echo $image_path_err; ?></span>
                 </div>
+
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Add News">
+                    <button type="submit" class="btn btn-primary">Add News</button>
                 </div>
             </form>
         </div>
 
-        <hr>
+        <hr style="margin:30px 0; border:none; border-top:1px solid #eee;">
 
         <h2>Existing News Articles</h2>
-        <table class="table">
+        <table class="table" aria-describedby="Existing news articles">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th style="width:60px;">ID</th>
                     <th>Title</th>
                     <th>Content</th>
-                    <th>Posted Date</th>
-                    <th>Images</th>
-                    <th>Actions</th>
+                    <th style="width:140px;">Posted Date</th>
+                    <th style="width:240px;">Images</th>
+                    <th style="width:200px;">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM news";
+                $sql = "SELECT * FROM news ORDER BY posted_date DESC, id DESC";
                 if($result = mysqli_query($link, $sql)){
                     if(mysqli_num_rows($result) > 0){
                         while($row = mysqli_fetch_array($result)){
                             echo "<tr>";
-                                echo "<td>" . $row['id'] . "</td>";
-                                echo "<td>" . $row['title'] . "</td>";
-                                echo "<td>" . substr($row['content'], 0, 100) . "...</td>";
-                                echo "<td>" . $row['posted_date'] . "</td>";
+                                echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['title']) . "</td>";
+                                $excerpt = substr(strip_tags($row['content']), 0, 140);
+                                if(strlen(strip_tags($row['content'])) > 140) $excerpt .= '...';
+                                echo "<td>" . htmlspecialchars($excerpt) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['posted_date']) . "</td>";
                                 echo "<td>";
-                                $images = json_decode($row['image_paths']);
-                                if(is_array($images)){
-                                    foreach($images as $image){
-                                        echo "<img src='../" . $image . "' width='100' style='margin-right: 5px;'>";
+                                    $images = json_decode($row['image_paths'], true);
+                                    if(is_array($images)){
+                                        foreach($images as $image){
+                                            echo "<img class='thumb' src='../" . htmlspecialchars($image) . "' alt='thumb'>";
+                                        }
                                     }
-                                }
                                 echo "</td>";
-                                echo "<td>";
-                                    echo "<a href='edit-news.php?id=". $row['id'] ."' class='btn btn-primary'>Update</a>";
-                                    echo "<a href='delete-news.php?id=". $row['id'] ."' class='btn btn-danger'>Delete</a>";
+                                echo "<td class='actions'>";
+                                    echo "<a href='edit-news.php?id=". urlencode($row['id']) ."' class='btn'>Update</a> ";
+                                    echo "<a href='delete-news.php?id=". urlencode($row['id']) ."' class='btn btn-danger' onclick=\"return confirm('Delete this news article?');\">Delete</a>";
                                 echo "</td>";
                             echo "</tr>";
                         }
                         mysqli_free_result($result);
-                    } else{
+                    } else {
                         echo "<tr><td colspan='6'>No news found.</td></tr>";
                     }
-                } else{
-                    echo "<tr><td colspan='6'>ERROR: Could not able to execute $sql. " . mysqli_error($link) . "</td></tr>";
+                } else {
+                    echo "<tr><td colspan='6'>ERROR: Could not execute query: " . htmlspecialchars(mysqli_error($link)) . "</td></tr>";
                 }
                 ?>
             </tbody>
         </table>
     </div>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const imageInput = document.getElementById('images');
-    const previewContainer = document.getElementById('image-preview-container');
-    const dataTransfer = new DataTransfer();
 
-    imageInput.addEventListener('change', function () {
-        for (const file of this.files) {
-            dataTransfer.items.add(file);
-            
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const previewWrapper = document.createElement('div');
-                previewWrapper.className = 'image-preview';
+    <!-- Preview + remove JS (robust handling) -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageInput = document.getElementById('images');
+        const previewContainer = document.getElementById('image-preview-container');
 
-                const img = document.createElement('img');
-                img.src = e.target.result;
+        // We'll maintain an array of File objects to submit
+        let selectedFiles = [];
 
-                const removeBtn = document.createElement('button');
-                removeBtn.className = 'remove-image';
-                removeBtn.innerHTML = '&times;';
-                removeBtn.addEventListener('click', function () {
-                    // Find and remove the file from the DataTransfer object
-                    for (let i = 0; i < dataTransfer.items.length; i++) {
-                        if (dataTransfer.items[i].getAsFile().name === file.name) {
-                            dataTransfer.items.remove(i);
-                            break;
-                        }
-                    }
-                    // Update the file input's files
-                    imageInput.files = dataTransfer.files;
-                    // Remove the preview
-                    previewWrapper.remove();
-                });
+        function renderPreviews() {
+            previewContainer.innerHTML = '';
+            selectedFiles.forEach((file, idx) => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'image-preview';
 
-                previewWrapper.appendChild(img);
-                previewWrapper.appendChild(removeBtn);
-                previewContainer.appendChild(previewWrapper);
-            };
-            reader.readAsDataURL(file);
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = file.name;
+
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'remove-image';
+                    btn.innerHTML = '&times;';
+                    btn.addEventListener('click', function () {
+                        selectedFiles.splice(idx, 1);
+                        updateFileInput();
+                        renderPreviews();
+                    });
+
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(btn);
+                    previewContainer.appendChild(wrapper);
+                };
+                reader.readAsDataURL(file);
+            });
         }
-        // Update the file input's files with the combined list
-        imageInput.files = dataTransfer.files;
+
+        function updateFileInput(){
+            // Build a DataTransfer to update the native input.files
+            const dt = new DataTransfer();
+            selectedFiles.forEach(f => dt.items.add(f));
+            imageInput.files = dt.files;
+        }
+
+        imageInput.addEventListener('change', function (e) {
+            // Add new files to selectedFiles (avoid duplicates by name + size)
+            const incoming = Array.from(e.target.files);
+            incoming.forEach(file => {
+                const exists = selectedFiles.some(f => f.name === file.name && f.size === file.size && f.lastModified === file.lastModified);
+                if(!exists) selectedFiles.push(file);
+            });
+            updateFileInput();
+            renderPreviews();
+        });
     });
-});
-</script>
+    </script>
 </body>
 </html>

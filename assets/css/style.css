@@ -493,17 +493,17 @@ p {
 }
 
 .stat-number {
+    display: block;
     font-family: var(--font-primary);
     font-size: 2.25rem;
     font-weight: 800;
     color: var(--primary-color);
-    display: block;
     letter-spacing: -0.015em;
 }
 
 .stat-label {
     font-family: var(--font-ui);
-    font-size: 0.875rem;
+    font-size: 0.900rem;
     font-weight: 500;
     color: var(--text-secondary);
     text-transform: uppercase;
@@ -661,6 +661,7 @@ p {
 .about-image {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .about-image img {
@@ -819,6 +820,13 @@ p {
     text-align: center;
     transition: all 0.3s ease;
     border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space vertically */
+}
+
+.country-card p {
+    flex-grow: 1; /* Allow description to take available space */
 }
 
 .country-card:hover {
@@ -857,14 +865,19 @@ p {
 }
 
 .feature-tag {
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     color: var(--white);
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     font-family: var(--font-ui);
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: 0.7rem;
+    font-weight: 800;
     letter-spacing: 0.025em;
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;       /* keep text on one line */
+    overflow: hidden;          /* hide overflow */
+    text-overflow: ellipsis;   /* add ... if text too long */
 }
 
 .country-card-uk {
@@ -1213,7 +1226,6 @@ p {
 
     .section-subtitle {
         font-size: 1rem;
-        line-height: 1.6;
     }
 
     .hero-stats {
@@ -1514,8 +1526,10 @@ p {
     margin-top: 2rem;
 }
 
-.benefit-item {
+.service-item {
     display: flex;
+    flex-direction: column; /* Stack icon and content vertically */
+    align-items: center; /* Center items horizontally */
     gap: 1rem;
     padding: 1.5rem;
     background: var(--light-gray);
@@ -1523,13 +1537,13 @@ p {
     transition: all 0.3s ease;
 }
 
-.benefit-item:hover {
+.service-item:hover {
     background: white;
     box-shadow: var(--shadow-medium);
     transform: translateY(-2px);
 }
 
-.benefit-icon {
+.service-icon {
     flex-shrink: 0;
     width: 50px;
     height: 50px;
@@ -1542,17 +1556,22 @@ p {
     font-size: 1.25rem;
 }
 
-.benefit-content h4 {
+.service-content {
+    text-align: left; /* Center text within the content block */
+}
+
+.service-content h4 {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
 }
 
-.benefit-content p {
+.service-content p {
+
     font-size: 0.95rem;
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: white;
     margin: 0;
 }
 
@@ -1561,6 +1580,17 @@ p {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+/* FIX: Only apply the grid to the service details page, not service cards */
+.service-details .service-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+/* Cards section override */
+.support-services .service-content {
+    display: block !important;
 }
 
 .service-info-card {
@@ -1590,6 +1620,11 @@ p {
     margin-bottom: 1.5rem;
     color: white;
 }
+
+.service-info-card .emergency-item span {
+    color: white;
+}
+
 
 .service-countries-card h3,
 .service-checklist-card h3,
@@ -1987,11 +2022,8 @@ p {
     align-items: center;
     justify-content: center;
     margin: 0 auto 1.5rem;
-}
-
-.tip-icon i {
-    font-size: 1.5rem;
     color: white;
+    font-size: 1.5rem;
 }
 
 .tip-item h3 {
@@ -2314,8 +2346,7 @@ p {
     transform: translateY(-5px);
 }
 
-.tip-icon,
-.guideline-icon {
+.tip-icon {
     width: 60px;
     height: 60px;
     background: var(--primary-color);
@@ -2518,167 +2549,416 @@ p {
 }
 
 /* Success Stories Section */
-.success-stories, .news {
-    padding: 8rem 0;
+.success-stories {
+    padding: 6rem 2rem;
+    background-color: #f9f9f9; /* Slightly off-white background for contrast */
 }
 
+.success-stories .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.success-stories .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.success-stories .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Grid Layout */
 .success-stories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
 }
 
+/* Story Card */
 .story-card {
     background: var(--white);
     border-radius: 20px;
     box-shadow: var(--shadow-light);
     overflow: hidden;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .story-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-large);
     border-color: var(--primary-color);
 }
 
+/* Image Styling */
 .story-image img {
     width: 100%;
-    height: auto;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
 }
 
+.story-card:hover .story-image img {
+    transform: scale(1.05);
+}
+
+/* Content Styling */
 .story-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .story-content h3 {
     font-family: var(--font-primary);
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    font-weight: 700;
+           color: #3B82F6; /* Blue color for student name */
+           margin-bottom: 0.5rem;
+           font-weight: 700;
+           font-size: 1.8rem;
 }
 
-.story-country {
-    font-family: var(--font-ui);
-    font-weight: 600;
-    color: var(--accent-color);
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    display: inline-block;
-    background: #e0e7ff;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
+.story-content h4 {
+      font-family: var(--font-ui);
+         font-weight: 600;
+         color: var(--accent-color);
+         font-size: 0.9rem;
+         display: inline-block;        /* ensures background fits text */
+         background: #e0e7ff;          /* light blue */
+         padding: 0.25rem 0.75rem;
+         border-radius: 20px;
+         margin-bottom: 1rem;
+         width: auto !important;       /* override any width inherited */
+         max-width: fit-content;
 }
 
 .story-content p {
-    font-size: 1.05rem;
-    line-height: 1.6;
+                font-size: 1.05rem;
+                line-height: 1.3;
+                padding: 0.25rem 0.35rem;
+                text- align: justify;
 }
 
-@media (max-width: 768px) {
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .success-stories {
+        padding: 4rem 1.5rem;
+    }
+
+    .success-stories .section-title {
+        font-size: 2rem;
+    }
+
     .story-image img {
-        height: auto;
+        height: 200px;
     }
 }
 
-/* News Section */
-.news-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* One column per row */
-    gap: 2.5rem;
+@media screen and (max-width: 480px) {
+    .success-stories .section-title {
+        font-size: 1.75rem;
+    }
+
+    .story-image img {
+        height: 180px;
+    }
 }
 
-.news-card {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    padding: 20px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 40px;
-    border: 2px solid #007bff; /* Blue border */
+
+/* Swiper pagination dots */
+.swiper-pagination {
+    display: block !important;
+    position: absolute;
+    bottom: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+.swiper-pagination-bullet {
+    background: white !important;
+    opacity: 0.7 !important;
+}
+.swiper-pagination-bullet-active {
+    background: var(--primary-color) !important;
+    opacity: 1 !important;
 }
 
-/* LEFT SIDE – IMAGE AREA */
-.news-card .swiper-container {
-    width: 45%;
-    height: auto;
-    aspect-ratio: 1 / 1;   /* ensures perfect fit for your square images */
-    border-radius: 12px;
-    overflow: hidden;
+/* Hide Swiper navigation arrows */
+.swiper-button-next, .swiper-button-prev {
+    display: none !important;
 }
 
-.news-card .swiper-slide img {
+/* Responsive adjustments for news cards */
+@media (max-width: 992px) {
+    .news-grid {
+        grid-template-columns: 1fr; /* One column on medium screens */
+    }
+}
+
+.discover-universities-btn-container {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.discover-universities-btn-container .btn {
+    width: 100%;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;  /* fills the box nicely */
-}
-
-/* RIGHT SIDE – TEXT */
-.news-content {
-    width: 55%;
-    display: flex;
-    flex-direction: column;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
     justify-content: center;
 }
 
-.news-content h3 {
-    margin-bottom: 10px;
-    font-size: 22px;
+.modal.show {
+    display: flex;
 }
 
-.news-content p {
+.modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border: none;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: var(--shadow-large);
+    animation: slideUp 0.5s ease-out;
+}
+
+.modal-title {
+    color: var(--primary-color);
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.university-section {
+    margin-bottom: 25px;
+}
+
+.university-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.university-section ul {
+    list-style-type: none;
+    padding-left: 0;
+    columns: 2;
+    gap: 10px;
+}
+
+.university-section ul li {
+    background: var(--light-gray);
+    padding: 10px 15px;
     margin-bottom: 8px;
-    line-height: 1.6;
-    text-align: justify;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* RESPONSIVE (mobile) */
-@media (max-width: 768px) {
-    .news-card {
-        flex-direction: column;
-    }
-    .news-card .swiper-container,
-    .news-content {
-        width: 100%;
-    }
+.university-section ul li img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
 }
 
-.news-date {
-    margin-top: auto;
-    font-style: italic;
+/* ================================
+   NEWS SECTION
+================================ */
+.news {
+    padding: 80px 0;
+    background: #f8f9fb;
 }
 
-.news-content h3 {
-    font-size: 30px;  /* increase the size */
-    font-weight: 800;   /* make it bold if needed */
+.section-header {
+    text-align: center;
     margin-bottom: 40px;
 }
 
-.news-card .swiper-container {
-    width: 45%;          /* or 100% on mobile */
-    aspect-ratio: 1 / 1; /* square */
-    border-radius: 12px;
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* ================================
+   NEWS GRID
+================================ */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+   gap: 2.5rem;
+}
+
+/* ================================
+   NEWS CARD
+================================ */
+.news-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* ================================
+   NEWS IMAGES (Swiper)
+================================ */
+.news-card .swiper,
+.news-card .swiper-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card .swiper-wrapper {
+    flex: 1; /* Slides take up remaining space */
+}
+
+.news-card .swiper-slide {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Makes slide square */
+    overflow: hidden;
+    max-height: 500px;
 }
 
 .news-card .swiper-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Shows full image without cropping */
+    object-position: center;
+    background: #f1f1f1;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
 }
 
-.news-card:hover {
+/* ================================
+   SWIPER PAGINATION
+================================ */
+.news-card .swiper-pagination {
+    position: relative !important; /* keep pagination inside the card */
+    bottom: auto !important;
+    margin-top: 10px;
+    text-align: center;
+}
 
+/* Swiper bullets styling */
+.news-card .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #333;
+    opacity: 0.7;
+    margin: 0 5px;
+}
 
+.news-card .swiper-pagination-bullet-active {
+    background: #e63946;
+}
 
-/* Mobile */
+/* Hide empty paginations */
+.swiper-pagination:empty {
+    display: none;
+}
+
+/* ================================
+   NEWS CONTENT
+================================ */
+.news-content {
+    padding: 20px;
+}
+
+.news-content h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #2a2a2a;
+}
+
+.news-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Date */
+.news-date {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
 @media (max-width: 768px) {
-    .news-card .swiper-container {
-        width: 100%;
-        aspect-ratio: auto; /* adjust to image height */
-        margin-bottom: 1rem;
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .news-card .swiper-slide img {
+        height: 200px;
     }
 }
+
+@media (max-width: 480px) {
+    .news-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .news-content p {
+        font-size: 0.95rem;
+    }
+}
+
+

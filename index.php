@@ -174,8 +174,8 @@
                         <div class="stat-label">Success Rate %</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" data-count="25">25+</div>
-                        <div class="stat-label">Students Helped</div>
+                        <div class="stat-number" data-count="25">0</div>
+                        <div class="stat-label">Students Helped +</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" data-count="9">0</div>
@@ -336,6 +336,9 @@
                         <span class="feature-tag">Quality Education</span>
                         <span class="feature-tag">Cultural Heritage</span>
                     </div>
+                    <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="uk-modal">Discover Universities</button>
+                    </div>
                 </div>
                 <div class="country-card">
                     <div class="country-flag">
@@ -346,6 +349,9 @@
                     <div class="country-features">
                         <span class="feature-tag">Affordable</span>
                         <span class="feature-tag">Work Opportunities</span>
+                    </div>
+                    <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="canada-modal">Discover Universities</button>
                     </div>
                 </div>
                 <div class="country-card">
@@ -358,6 +364,9 @@
                         <span class="feature-tag">High Quality</span>
                         <span class="feature-tag">Multicultural</span>
                     </div>
+                    <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="australia-modal">Discover Universities</button>
+                    </div>
                 </div>
                 <div class="country-card">
                     <div class="country-flag">
@@ -368,6 +377,9 @@
                     <div class="country-features">
                         <span class="feature-tag">Affordable</span>
                         <span class="feature-tag">European Access</span>
+                    </div>
+                    <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="italy-modal">Discover Universities</button>
                     </div>
                 </div>
                 <div class="country-card">
@@ -380,6 +392,9 @@
                         <span class="feature-tag">Affordable Living</span>
                         <span class="feature-tag">EU Access</span>
                     </div>
+                    <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="latvia-modal">Discover Universities</button>
+                    </div>
                 </div>
                 <div class="country-card">
                     <div class="country-flag">
@@ -390,6 +405,9 @@
                     <div class="country-features">
                         <span class="feature-tag">Affordable</span>
                         <span class="feature-tag">European Access</span>
+                    </div>
+                    <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="new-zealand-modal">Discover Universities</button>
                     </div>
                 </div>
                 <div class="country-card">
@@ -402,6 +420,9 @@
                     <span class="feature-tag">Affordable</span>
                     <span class="feature-tag">European Access</span>
                     </div>
+                    <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="korea-modal">Discover Universities</button>
+                    </div>
                 </div>
                 <div class="country-card">
                     <div class="country-flag">
@@ -412,6 +433,9 @@
                     <div class="country-features">
                     <span class="feature-tag">Affordable</span>
                     <span class="feature-tag">European Access</span>
+                    </div>
+                    <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="hungary-modal">Discover Universities</button>
                     </div>
                 </div>
                 <div class="country-card">
@@ -424,9 +448,166 @@
                      <span class="feature-tag">Affordable</span>
                      <span class="feature-tag">European Access</span>
                      </div>
+                     <div class="discover-universities-btn-container">
+                        <button class="btn btn-primary open-modal-btn" data-target="malta-modal">Discover Universities</button>
+                    </div>
                  </div>
+            </div>
         </div>
     </section>
+
+    <!-- Modals -->
+    <div id="uk-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">United Kingdom</h2>
+            <div class="university-section">
+                <h3>Our Partnership Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/coventry.ac.uk" alt="Coventry University Logo">University of Coventry</li>
+                    <li><img src="https://logo.clearbit.com/gre.ac.uk" alt="University of Greenwich Logo">University of Greenwich</li>
+                    <li><img src="https://logo.clearbit.com/chester.ac.uk" alt="University of Chester Logo">University of Chester</li>
+                </ul>
+            </div>
+            <div class="university-section">
+                <h3>Universities We Are Working With</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/herts.ac.uk" alt="University of Hertfordshire Logo">University of Hertfordshire</li>
+                    <li><img src="https://logo.clearbit.com/law.ac.uk" alt="University of Law Logo">University of Law</li>
+                    <li><img src="https://logo.clearbit.com/sunderland.ac.uk" alt="University of Sunderland Logo">University of Sunderland</li>
+                    <li><img src="https://logo.clearbit.com/ntu.ac.uk" alt="Nottingham Trent University Logo">Nottingham Trent University</li>
+                    <li><img src="https://logo.clearbit.com/dundee.ac.uk" alt="University of Dundee Logo">University of Dundee</li>
+                    <li><img src="https://logo.clearbit.com/cardiffmet.ac.uk" alt="Cardiff Metropolitan University Logo">Cardiff Metropolitan University</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="canada-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">Canada</h2>
+            <div class="university-section">
+                <h3>Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/ibu.ca" alt="IBU Logo">International Business University (IBU)</li>
+                    <li><img src="https://logo.clearbit.com/algomau.ca" alt="Algoma University Logo">Algoma University</li>
+                    <li><img src="https://logo.clearbit.com/northeastern.edu" alt="Northeastern University Logo">Northeastern University</li>
+                    <li><img src="https://logo.clearbit.com/nuf.ca" alt="University of Niagara Falls Logo">University of Niagara Falls</li>
+                    <li><img src="https://logo.clearbit.com/unbc.ca" alt="UNBC Logo">University of Northern British Columbia</li>
+                    <li><img src="https://logo.clearbit.com/trentu.ca" alt="Trent University Logo">Trent University</li>
+                    <li><img src="https://logo.clearbit.com/queensu.ca" alt="Queen's University Logo">Queen's University</li>
+                    <li><img src="https://logo.clearbit.com/mtroyal.ca" alt="Mount Royal University Logo">Mount Royal University</li>
+                    <li><img src="https://logo.clearbit.com/saskpolytech.ca" alt="Saskatchewan Polytechnic Logo">Saskatchewan Polytechnic</li>
+                    <li><img src="https://logo.clearbit.com/uwaterloo.ca" alt="University of Waterloo Logo">University of Waterloo</li>
+                    <li><img src="https://logo.clearbit.com/yorkvilleu.ca" alt="Yorkville University Logo">Yorkville University</li>
+                    <li><img src="https://logo.clearbit.com/laurentian.ca" alt="Laurentian University Logo">Laurentian University</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="australia-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">Australia</h2>
+            <div class="university-section">
+                <h3>Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/latrobe.edu.au" alt="La Trobe University Logo">La Trobe University</li>
+                    <li><img src="https://logo.clearbit.com/deakin.edu.au" alt="Deakin University Logo">Deakin University</li>
+                    <li><img src="https://logo.clearbit.com/federation.edu.au" alt="Federation University Logo">Federation University</li>
+                    <li><img src="https://logo.clearbit.com/griffith.edu.au" alt="Griffith University Logo">Griffith University</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="italy-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">Italy</h2>
+            <div class="university-section">
+                <h3>Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/unipi.it" alt="University of Pisa Logo">University of Pisa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="latvia-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">Latvia</h2>
+            <div class="university-section">
+                <h3>Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/turiba.lv" alt="Turiba University Logo">Turiba university</li>
+                    <li><img src="https://logo.clearbit.com/rtu.lv" alt="Riga Technical University Logo">Riga technical</li>
+                    <li><img src="https://logo.clearbit.com/llu.lv" alt="Latvia University of Life Sciences and Technologies Logo">Latvia University of Life Sciences and Technologies</li>
+                    <li><img src="https://logo.clearbit.com/eka.edu.lv" alt="EKA University Logo">EKA university</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="malta-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">Malta</h2>
+            <div class="university-section">
+                <h3>Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/gbs.ac.cy" alt="GBS Logo">GBS</li>
+                    <li><img src="https://logo.clearbit.com/globalcollege.edu.mt" alt="Global College Malta Logo">Global College Malta</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="hungary-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">Hungary</h2>
+            <div class="university-section">
+                <h3>Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/uni-bge.hu" alt="Budapest Business University Logo">Budapest Business University</li>
+                    <li><img src="https://logo.clearbit.com/uni-obuda.hu" alt="Óbuda University Logo">Óbuda University</li>
+                    <li><img src="https://logo.clearbit.com/nje.hu" alt="John von Neumann University Logo">John von Neumann University</li>
+                    <li><img src="https://logo.clearbit.com/uniduna.hu" alt="University of Dunaújváros Logo">University of Dunaújváros</li>
+                    <li><img src="https://logo.clearbit.com/bic.hu" alt="Budapest International College Logo">Budapest International College</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="new-zealand-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">New Zealand</h2>
+            <div class="university-section">
+                <h3>Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/auckland.ac.nz" alt="University of Auckland Logo">University of Auckland</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="korea-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">Korea</h2>
+            <div class="university-section">
+                <h3>Universities</h3>
+                <ul>
+                    <li><img src="https://logo.clearbit.com/snu.ac.kr" alt="Seoul National University Logo">Seoul National University</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="section contact">
