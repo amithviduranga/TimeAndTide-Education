@@ -545,7 +545,7 @@ p {
     font-size: 1.125rem;
     font-weight: 400;
     color: var(--text-secondary);
- 
+
     margin: 0 auto;
     line-height: 1.6;
 }
@@ -807,10 +807,12 @@ p {
 }
 
 .feature-tag {
+    flex: 1 1 auto;           /* flexible width */
+    min-width: 0;              /* important to allow shrinking */
+    padding: 0.3rem 1.3rem;
+    border-radius: 20px;
     background: var(--primary-color);
     color: var(--white);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
     font-family: var(--font-ui);
     font-size: 0.7rem;
     font-weight: 800;
