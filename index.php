@@ -6,123 +6,25 @@
     <title>Time and Tide Education | International Student Visa Consultancy</title>
     <meta name="description" content="Expert student visa consultancy services for UK, Canada, Australia, Italy, and Latvia. High success rate, personalized guidance, and transparent process.">
     
+    <!-- Preload Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome with multiple CDN fallbacks -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet" 
-          integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
-          crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
     
-    <!-- Fallback CDNs -->
-    <link href="https://pro.fontawesome.com/releases/v6.0.0/css/all.css" rel="stylesheet" 
-          integrity="sha384-YcOTlFo6sJOg7g+J+VRpPU6FqKK2LvHJUWdXX/HtLLDMjXqy+i4rJGqhkz/Pc+lF" 
-          crossorigin="anonymous"
-          onerror="this.onerror=null;this.href='https://use.fontawesome.com/releases/v6.7.1/css/all.css';">
+    <!-- Fallback Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
     
-    <!-- Local fallback and icon-specific CSS -->
-    <style>
-        /* Font Awesome icon fallbacks */
-        .fa-passport::before,
-        .fas.fa-passport::before { content: "\f5ab"; }
-        .fa-university::before,
-        .fas.fa-university::before { content: "\f19c"; }
-        .fa-file-alt::before,
-        .fas.fa-file-alt::before { content: "\f15c"; }
-        .fa-money-bill-wave::before,
-        .fas.fa-money-bill-wave::before { content: "\f53a"; }
-        .fa-plane::before,
-        .fas.fa-plane::before { content: "\f072"; }
-        .fa-redo-alt::before,
-        .fas.fa-redo-alt::before { content: "\f2f9"; }
-        .fa-check-circle::before,
-        .fas.fa-check-circle::before { content: "\f058"; }
-        .fa-eye::before,
-        .fas.fa-eye::before { content: "\f06e"; }
-        .fa-user-friends::before,
-        .fas.fa-user-friends::before { content: "\f500"; }
-        .fa-graduation-cap::before,
-        .fas.fa-graduation-cap::before { content: "\f19d"; }
-        .fa-map-marker-alt::before,
-        .fas.fa-map-marker-alt::before { content: "\f3c5"; }
-        .fa-phone::before,
-        .fas.fa-phone::before { content: "\f095"; }
-        .fa-envelope::before,
-        .fas.fa-envelope::before { content: "\f0e0"; }
-        .fa-clock::before,
-        .fas.fa-clock::before { content: "\f017"; }
-        .fa-facebook::before,
-        .fab.fa-facebook::before { content: "\f09a"; }
-        .fa-twitter::before,
-        .fab.fa-twitter::before { content: "\f099"; }
-        .fa-linkedin::before,
-        .fab.fa-linkedin::before { content: "\f08c"; }
-        .fa-instagram::before,
-        .fab.fa-instagram::before { content: "\f16d"; }
-        
-        /* Base Font Awesome styles for fallback */
-        .fas, .fab, .far {
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-font-smoothing: antialiased;
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            line-height: 1;
-            text-rendering: auto;
-        }
-        
-        .fas::before, .fab::before, .far::before {
-            font-weight: 900;
-            font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands", "FontAwesome", Arial, sans-serif;
-        }
-        
-        /* Icon styling enhancements */
-        .service-icon i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            transition: color 0.3s ease;
-        }
-        
-        .service-card:hover .service-icon i {
-            color: var(--accent-color);
-        }
-        
-        .feature-item i {
-            font-size: 1.2rem;
-            color: var(--success-color);
-            margin-right: 0.5rem;
-        }
-        
-        .contact-item i {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-right: 0.75rem;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .social-link i {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            transition: color 0.3s ease;
-        }
-        
-        .social-link:hover i {
-            color: var(--primary-color);
-        }
-        
-        .footer-section li i {
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            margin-right: 0.5rem;
-            width: 16px;
-            text-align: center;
-        }
-    </style>
+    <!-- Local Font Awesome fallback for localhost -->
+    <noscript>
+        <link href="https://use.fontawesome.com/releases/v6.5.1/css/all.css" rel="stylesheet">
+    </noscript>
     
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/font-awesome-fallback.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -742,6 +644,58 @@
 
     <!-- Scripts -->
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/font-awesome-fallback.js"></script>
+    
+    <!-- Font Awesome Fallback Script -->
+    <script>
+    // Check if Font Awesome is loaded
+    function checkFontAwesome() {
+        const testIcon = document.createElement('i');
+        testIcon.className = 'fas fa-check';
+        testIcon.style.position = 'absolute';
+        testIcon.style.left = '-9999px';
+        document.body.appendChild(testIcon);
+        
+        const computedStyle = window.getComputedStyle(testIcon, ':before');
+        const isLoaded = computedStyle.fontFamily.indexOf('Font Awesome') !== -1;
+        
+        document.body.removeChild(testIcon);
+        
+        if (!isLoaded) {
+            // Fallback to emoji icons if Font Awesome fails
+            const iconMap = {
+                'fa-passport': '📋',
+                'fa-university': '🎓', 
+                'fa-file-alt': '📄',
+                'fa-money-bill-wave': '💰',
+                'fa-plane': '✈️',
+                'fa-redo-alt': '🔄',
+                'fa-check-circle': '✅',
+                'fa-eye': '👁️',
+                'fa-user-friends': '👥',
+                'fa-graduation-cap': '🎓',
+                'fa-map-marker-alt': '📍',
+                'fa-phone': '📞',
+                'fa-envelope': '✉️',
+                'fa-clock': '🕒'
+            };
+            
+            document.querySelectorAll('i[class*="fa-"]').forEach(icon => {
+                const classes = icon.className.split(' ');
+                const iconClass = classes.find(cls => cls.startsWith('fa-'));
+                if (iconClass && iconMap[iconClass]) {
+                    icon.innerHTML = iconMap[iconClass];
+                    icon.style.fontFamily = 'inherit';
+                }
+            });
+        }
+    }
+    
+    // Run check after page load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', checkFontAwesome);
+    } else {
+        checkFontAwesome();
+    }
+    </script>
 </body>
 </html>

@@ -11,10 +11,10 @@
     --font-secondary: 'Source Sans 3', sans-serif; /* Clean sans-serif for body */
     --font-ui: 'Inter', sans-serif;               /* Modern sans-serif for UI */
     
-    /* White-based color scheme for consultancy */
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
-    --accent-color: #3b82f6;
+    /* Beautiful green gradient color scheme */
+    --primary-color: #169a80;
+    --secondary-color: #0d7364;
+    --accent-color: #1dd1a1;
     --text-primary: #1f2937;
     --text-secondary: #6b7280;
     --text-accent: #374151;
@@ -26,8 +26,8 @@
     --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-large: 0 20px 25px rgba(0, 0, 0, 0.1);
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-primary: linear-gradient(135deg, #16a085 0%, #1dd1a1 50%, #10d9c4 100%);
+    --gradient-secondary: linear-gradient(135deg, #0d7364 0%, #16a085 100%);
 }
 
 html {
@@ -153,6 +153,30 @@ p {
     font-family: inherit !important;
     font-weight: normal !important;
     font-style: normal !important;
+}
+
+/* Font Awesome icon fallback styles */
+.fas, .far, .fab, .fa {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands", "FontAwesome" !important;
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Service icon specific fixes */
+.service-icon i {
+    font-size: 2.5rem !important;
+    color: var(--white) !important;
+    display: block !important;
+    text-align: center !important;
+    line-height: 1 !important;
+}
+
+/* Ensure icons are visible */
+i[class*="fa-"]:before {
+    content: attr(data-icon);
 }
 
 /* Enhanced text styles */
@@ -380,9 +404,9 @@ p {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-        rgba(37, 99, 235, 0.02) 0%, 
+        rgba(22, 160, 133, 0.02) 0%, 
         rgba(255, 255, 255, 0.3) 50%, 
-        rgba(37, 99, 235, 0.01) 100%);
+        rgba(16, 217, 196, 0.01) 100%);
     pointer-events: none;
     z-index: 1;
 }
@@ -1405,7 +1429,7 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.8) 0%, rgba(30, 64, 175, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(22, 160, 133, 0.8) 0%, rgba(13, 115, 100, 0.9) 100%);
     z-index: 2;
 }
 
@@ -2622,7 +2646,7 @@ p {
 
 .story-content h3 {
     font-family: var(--font-primary);
-           color: #3B82F6; /* Blue color for student name */
+           color: var(--primary-color); /* Green color for student name */
            margin-bottom: 0.5rem;
            font-weight: 700;
            font-size: 1.8rem;
@@ -2634,7 +2658,7 @@ p {
          color: var(--accent-color);
          font-size: 0.9rem;
          display: inline-block;        /* ensures background fits text */
-         background: #e0e7ff;          /* light blue */
+         background: #d4f4f0;          /* light green */
          padding: 0.25rem 0.75rem;
          border-radius: 20px;
          margin-bottom: 1rem;
