@@ -2,8 +2,8 @@
 // Database configuration
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root'); // Empty password for default local setups
-define('DB_NAME', 'Student_portal');
+define('DB_PASSWORD', 'Amith@1997'); // Empty password for default local setups
+define('DB_NAME', 'timeandtide_student_potral');
 
 /* Attempt to connect to MySQL database */
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
