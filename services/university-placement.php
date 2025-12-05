@@ -61,16 +61,16 @@
                     </p>
                     <div class="service-hero-stats">
                         <div class="hero-stat-item">
-                            <span class="stat-number">20+</span>
-                            <span class="stat-label">Partner Universities</span>
+                            <span class="stat-number" data-count="20">0</span>
+                            <span class="stat-label">Partner Universities +</span>
                         </div>
                         <div class="hero-stat-item">
-                            <span class="stat-number">97%</span>
-                            <span class="stat-label">Placement Success</span>
+                            <span class="stat-number" data-count="97">0</span>
+                            <span class="stat-label">Placement Success %</span>
                         </div>
                         <div class="hero-stat-item">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Study Programs</span>
+                            <span class="stat-number" data-count="50">0</span>
+                            <span class="stat-label">Study Programs +</span>
                         </div>
                     </div>
                 </div>

@@ -8,11 +8,11 @@ require_once "../admin/db_connect.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News | Time and Tide Education</title>
     <meta name="description" content="The latest news and updates from Time and Tide Education.">
-    
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -60,14 +60,15 @@ require_once "../admin/db_connect.php";
                             echo "<div class='news-card'>";
                                 $images = json_decode($row['image_paths']);
                                 if(is_array($images) && count($images) > 0){
-                                    echo "<div class='swiper-container news-carousel-" . $news_id . "'>";
-                                        echo "<div class='swiper-wrapper'>";
-                                            foreach($images as $image){
-                                                echo "<div class='swiper-slide'><img src='../" . htmlspecialchars($image) . "' alt='" . htmlspecialchars($row['title']) . "'></div>";
-                                            }
-                                        echo "</div>";
-                                        echo "<div class='swiper-pagination'></div>";
-                                    echo "</div>";
+                                   echo "<div class='swiper-container news-carousel-" . $news_id . "'>";
+                                       echo "<div class='swiper-wrapper'>";
+                                           foreach($images as $image){
+                                               echo "<div class='swiper-slide'><img src='../" . htmlspecialchars($image) . "' alt='" . htmlspecialchars($row['title']) . "'></div>";
+                                           }
+                                       echo "</div>";
+                                       // Give each pagination a unique class
+                                      echo "<div class='swiper-pagination news-pagination-" . $news_id . "'></div>";
+                                          echo "</div>";
                                 }
                                 echo "<div class='news-content'>";
                                     echo "<h3>" . htmlspecialchars($row['title']) . "</h3>";

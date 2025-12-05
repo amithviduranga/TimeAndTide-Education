@@ -60,7 +60,7 @@ require_once "../admin/db_connect.php";
                                 echo "</div>";
                                 echo "<div class='story-content'>";
                                     echo "<h3>" . htmlspecialchars($row['student_name']) . "</h3>";
-                                    echo "<p class='story-country'>" . htmlspecialchars($row['country']) . "</p>";
+                                    echo "<h4 class='story-country'>" . htmlspecialchars($row['country']) . "</h4>";
                                     echo "<p>" . htmlspecialchars($row['description']) . "</p>";
                                 echo "</div>";
                             echo "</div>";

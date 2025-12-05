@@ -61,15 +61,15 @@
                     </p>
                     <div class="service-hero-stats">
                         <div class="hero-stat-item">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">Support Available</span>
+                            <span class="stat-number" data-count="24">0</span>
+                            <span class="stat-label">/7 Support Available</span>
                         </div>
                         <div class="hero-stat-item">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Students Supported</span>
+                            <span class="stat-number" data-count="100">0</span>
+                            <span class="stat-label">Students Supported %</span>
                         </div>
                         <div class="hero-stat-item">
-                            <span class="stat-number">5</span>
+                            <span class="stat-number" data-count="5">0</span>
                             <span class="stat-label">Countries Covered</span>
                         </div>
                     </div>
@@ -106,17 +106,8 @@
                                     <i class="fas fa-plane"></i>
                                 </div>
                                 <div class="service-content">
-                                    <h4>Travel Arrangements</h4>
-                                    <p>Flight booking assistance, travel insurance guidance, and complete itinerary planning.</p>
-                                </div>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-icon">
-                                    <i class="fas fa-home"></i>
-                                </div>
-                                <div class="service-content">
-                                    <h4>Accommodation Support</h4>
-                                    <p>University housing applications, private accommodation searches, and booking assistance.</p>
+                                    <h4>Travel Planning</h4>
+                                    <p>Flight booking assistance, travel insurance arrangement, and complete itinerary coordination.</p>
                                 </div>
                             </div>
                             <div class="service-item">
@@ -126,6 +117,15 @@
                                 <div class="service-content">
                                     <h4>Airport Pickup</h4>
                                     <p>Reliable airport transfer services to ensure safe arrival at your destination.</p>
+                                </div>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h4>Accommodation Support</h4>
+                                    <p>University housing applications, private accommodation searches, and booking assistance.</p>
                                 </div>
                             </div>
                             <div class="service-item">

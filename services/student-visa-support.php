@@ -61,13 +61,13 @@
                     </p>
                     <div class="service-hero-stats">
                         <div class="hero-stat-item">
-                            <span class="stat-number">98%</span>
-                            <span class="stat-label">Success Rate</span>
+                            <span class="stat-number" data-count="98">0</span>
+                            <span class="stat-label">Success Rate %</span>
                         </div>
                         
                         <div class="hero-stat-item">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Years Experience</span>
+                            <span class="stat-number" data-count="15">0</span>
+                            <span class="stat-label">Years Experience +</span>
                         </div>
                     </div>
                 </div>
@@ -166,16 +166,16 @@
                             <span>Processing Time: 2-4 weeks</span>
                         </div>
                         <div class="info-item">
-                            <i class="fas fa-users"></i>
-                            <span>Expert Counselors Available</span>
+                            <i class="fas fa-percentage"></i>
+                            <span>85% Success Rate</span>
                         </div>
                         <div class="info-item">
-                            <i class="fas fa-globe"></i>
-                            <span>All Major Countries Supported</span>
+                            <i class="fas fa-file-contract"></i>
+                            <span>Complete Case Review</span>
                         </div>
                         <div class="info-item">
-                            <i class="fas fa-headset"></i>
-                            <span>Online Support Available</span>
+                            <i class="fas fa-handshake"></i>
+                            <span>Success-Based Approach</span>
                         </div>
                         <a href="../index.php#contact" class="btn btn-primary btn-full">Get Free Consultation</a>
                     </div>

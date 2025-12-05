@@ -61,16 +61,16 @@
                     </p>
                     <div class="service-hero-stats">
                         <div class="hero-stat-item">
-                            <span class="stat-number">85%</span>
-                            <span class="stat-label">Resubmission Success</span>
+                            <span class="stat-number" data-count="85">0</span>
+                            <span class="stat-label">Resubmission Success %</span>
                         </div>
                         <div class="hero-stat-item">
-                            <span class="stat-number">200+</span>
-                            <span class="stat-label">Cases Overturned</span>
+                            <span class="stat-number" data-count="200">0</span>
+                            <span class="stat-label">Cases Overturned +</span>
                         </div>
                         <div class="hero-stat-item">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Years Experience</span>
+                            <span class="stat-number" data-count="10">0</span>
+                            <span class="stat-label">Years Experience +</span>
                         </div>
                     </div>
                 </div>
@@ -244,28 +244,6 @@
                             <span>Success-Based Approach</span>
                         </div>
                         <a href="../index.php#contact" class="btn btn-primary btn-full">Start Resubmission Process</a>
-                    </div>
-
-                    <div class="resubmission-tips-card">
-                        <h3>Important Notes</h3>
-                        <div class="tips-list">
-                            <div class="tip-item">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                <span>Wait for recommended cooling-off period</span>
-                            </div>
-                            <div class="tip-item">
-                                <i class="fas fa-plus"></i>
-                                <span>Provide substantial new evidence</span>
-                            </div>
-                            <div class="tip-item">
-                                <i class="fas fa-edit"></i>
-                                <span>Address every rejection reason</span>
-                            </div>
-                            <div class="tip-item">
-                                <i class="fas fa-shield-check"></i>
-                                <span>Ensure document authenticity</span>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="service-info-card">
