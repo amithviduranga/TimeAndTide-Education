@@ -1,3 +1,21 @@
+document.addEventListener('DOMContentLoaded', function () {
+    for (let i = 1; i <= <?php echo $news_id ?? 0; ?>; i++) {
+        new Swiper('.news-carousel-' + i, {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.news-pagination-' + i,  // use unique pagination
+                clickable: true,
+            },
+        });
+    }
+});
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
@@ -86,3 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+

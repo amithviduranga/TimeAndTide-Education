@@ -8,32 +8,32 @@ require_once "../admin/db_connect.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News | Time and Tide Education</title>
     <meta name="description" content="The latest news and updates from Time and Tide Education.">
-
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- Local Font Awesome (self-hosted) -->
-    <link href="../assets/fonts/fontawesome/all.min.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
     <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+    <script src="../assets/js/swiper-bundle.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="../assets/images/about.jpg" alt="Time and Tide Education" class="logo-img">
+                <img src="/assets/images/about.jpg" alt="Time and Tide Education" class="logo-img">
                 <span class="logo-text">Time & Tide Education</span>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <a href="../index.php#home" class="nav-link">Home</a>
-                <a href="../index.php#about" class="nav-link">About</a>
-                <a href="../index.php#services" class="nav-link">Services</a>
-                <a href="../index.php#countries" class="nav-link">Countries</a>
-                <a href="success-stories.php" class="nav-link">Voices of Success</a>
-                <a href="news.php" class="nav-link">News</a>
-                <a href="../index.php#contact" class="nav-link">Contact</a>
+                <a href="/index.php#home" class="nav-link">Home</a>
+                <a href="/index.php#about" class="nav-link">About</a>
+                <a href="/index.php#services" class="nav-link">Services</a>
+                <a href="/index.php#countries" class="nav-link">Countries</a>
+                <a href="/services/success-stories.php" class="nav-link">Voices of Success</a>
+                <a href="/services/news.php" class="nav-link">News</a>
+                <a href="/index.php#contact" class="nav-link">Contact</a>
             </div>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
@@ -55,21 +55,19 @@ require_once "../admin/db_connect.php";
                 $sql = "SELECT * FROM news ORDER BY posted_date DESC";
                 if($result = mysqli_query($link, $sql)){
                     if(mysqli_num_rows($result) > 0){
-                        $news_id = 0;
                         while($row = mysqli_fetch_array($result)){
-                            $news_id++;
                             echo "<div class='news-card'>";
                                 $images = json_decode($row['image_paths']);
                                 if(is_array($images) && count($images) > 0){
-                                   echo "<div class='swiper-container news-carousel-" . $news_id . "'>";
-                                       echo "<div class='swiper-wrapper'>";
-                                           foreach($images as $image){
-                                               echo "<div class='swiper-slide'><img src='../" . htmlspecialchars($image) . "' alt='" . htmlspecialchars($row['title']) . "'></div>";
-                                           }
-                                       echo "</div>";
-                                       // Give each pagination a unique class
-                                      echo "<div class='swiper-pagination news-pagination-" . $news_id . "'></div>";
-                                          echo "</div>";
+                                    // Use a unique class for each swiper container
+                                    echo "<div class='swiper-container news-carousel'>";
+                                        echo "<div class='swiper-wrapper'>";
+                                            foreach($images as $image){
+                                                echo "<div class='swiper-slide'><img src='/" . htmlspecialchars($image) . "' alt='" . htmlspecialchars($row['title']) . "'></div>";
+                                            }
+                                        echo "</div>";
+                                        echo "<div class='swiper-pagination'></div>";
+                                    echo "</div>";
                                 }
                                 echo "<div class='news-content'>";
                                     echo "<h3>" . htmlspecialchars($row['title']) . "</h3>";
@@ -96,7 +94,7 @@ require_once "../admin/db_connect.php";
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="../assets/images/about.jpg" alt="Time and Tide Education">
+                        <img src="/assets/images/about.jpg" alt="Time and Tide Education">
                         <span>Time & Tide Education</span>
                     </div>
                     <p>Your trusted partner for international education and student visa services.</p>
@@ -110,22 +108,22 @@ require_once "../admin/db_connect.php";
                 <div class="footer-section">
                     <h3>Services</h3>
                     <ul>
-                        <li><a href="student-visa-support.php">Student Visa Support</a></li>
-                        <li><a href="university-placement.php">University Placement</a></li>
-                        <li><a href="documentation.php">Documentation</a></li>
-                        <li><a href="scholarship-support.php">Scholarship Support</a></li>
-                        <li><a href="pre-departure-support.php">Pre-departure Support</a></li>
-                        <li><a href="visa-resubmission.php">Visa Resubmission</a></li>
+                        <li><a href="/services/student-visa-support.php">Student Visa Support</a></li>
+                        <li><a href="/services/university-placement.php">University Placement</a></li>
+                        <li><a href="/services/documentation.php">Documentation</a></li>
+                        <li><a href="/services/scholarship-support.php">Scholarship Support</a></li>
+                        <li><a href="/services/pre-departure-support.php">Pre-departure Support</a></li>
+                        <li><a href="/services/visa-resubmission.php">Visa Resubmission</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Countries</h3>
                     <ul>
-                        <li><a href="../index.php#countries">United Kingdom</a></li>
-                        <li><a href="../index.php#countries">Canada</a></li>
-                        <li><a href="../index.php#countries">Australia</a></li>
-                        <li><a href="../index.php#countries">Italy</a></li>
-                        <li><a href="../index.php#countries">Latvia</a></li>
+                        <li><a href="/index.php#countries">United Kingdom</a></li>
+                        <li><a href="/index.php#countries">Canada</a></li>
+                        <li><a href="/index.php#countries">Australia</a></li>
+                        <li><a href="/index.php#countries">Italy</a></li>
+                        <li><a href="/index.php#countries">Latvia</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -145,22 +143,24 @@ require_once "../admin/db_connect.php";
 
     <!-- Scripts -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="../assets/js/script.js"></script>
+    <script src="/assets/js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            for (let i = 1; i <= <?php echo $news_id ?? 0; ?>; i++) {
-                new Swiper('.news-carousel-' + i, {
+            // Initialize all swipers on the page
+            const swipers = document.querySelectorAll('.news-carousel');
+            swipers.forEach(function(swiper) {
+                new Swiper(swiper, {
                     loop: true,
                     autoplay: {
                         delay: 3000,
                         disableOnInteraction: false,
                     },
                     pagination: {
-                        el: '.swiper-pagination',
+                        el: swiper.querySelector('.swiper-pagination'),
                         clickable: true,
                     },
                 });
-            }
+            });
         });
     </script>
 </body>
