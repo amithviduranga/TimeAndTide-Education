@@ -156,7 +156,7 @@ require_once "../admin/db_connect.php";
                         disableOnInteraction: false,
                     },
                     pagination: {
-                        el: '.swiper-pagination',
+                        el: '.news-pagination-' + i,
                         clickable: true,
                     },
                 });
