@@ -1,21 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-    for (let i = 1; i <= <?php echo $news_id ?? 0; ?>; i++) {
-        new Swiper('.news-carousel-' + i, {
-            loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.news-pagination-' + i,  // use unique pagination
-                clickable: true,
-            },
-        });
-    }
-});
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
@@ -58,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     stat.textContent = finalCount + '+';
                 } else if (label.includes('/7')) {
                     stat.textContent = '24/7';
+                } else if (label.toLowerCase().includes('hrs')) {
+                    stat.textContent = finalCount + 'hrs';
                 } else {
                     stat.textContent = finalCount;
                 }
@@ -69,7 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
     statNumbers.forEach(stat => {
         const finalCount = parseInt(stat.getAttribute('data-count'));
         const label = stat.nextElementSibling.textContent;
-        animateCount(stat, finalCount, label);
+        // Only animate if finalCount is a valid number
+        if (!isNaN(finalCount)) {
+            animateCount(stat, finalCount, label);
+        }
     });
 
     // Modal functionality
@@ -104,6 +91,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-
-
