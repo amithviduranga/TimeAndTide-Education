@@ -99,7 +99,7 @@ p {
 
 /* Font Awesome icon enhancements */
 .service-icon i {
-    font-size: 10rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
     transition: color 0.3s ease, transform 0.3s ease;
     display: block;
@@ -167,7 +167,7 @@ p {
 
 /* Service icon specific fixes */
 .service-icon i {
-    font-size: 2.5rem !important;
+    font-size: 1.2rem !important;
     color: var(--white) !important;
     display: block !important;
     text-align: center !important;
@@ -862,7 +862,7 @@ p {
 }
 
 .service-icon i {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--white);
     font-family: "Font Awesome 6 Free", "FontAwesome" !important;
     font-weight: 900 !important;
