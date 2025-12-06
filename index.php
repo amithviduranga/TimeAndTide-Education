@@ -6,22 +6,11 @@
     <title>Time and Tide Education | International Student Visa Consultancy</title>
     <meta name="description" content="Expert student visa consultancy services for UK, Canada, Australia, Italy, and Latvia. High success rate, personalized guidance, and transparent process.">
     
-    <!-- Preload Font Awesome -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
-    
-    <!-- Fallback Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
-    
-    <!-- Local Font Awesome fallback for localhost -->
-    <noscript>
-        <link href="https://use.fontawesome.com/releases/v6.5.1/css/all.css" rel="stylesheet">
-    </noscript>
+    <!-- Local Font Awesome (self-hosted) -->
+    <link href="assets/fonts/fontawesome/all.min.css" rel="stylesheet">
     
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -645,57 +634,5 @@
     <!-- Scripts -->
     <script src="assets/js/script.js"></script>
     
-    <!-- Font Awesome Fallback Script -->
-    <script>
-    // Check if Font Awesome is loaded
-    function checkFontAwesome() {
-        const testIcon = document.createElement('i');
-        testIcon.className = 'fas fa-check';
-        testIcon.style.position = 'absolute';
-        testIcon.style.left = '-9999px';
-        document.body.appendChild(testIcon);
-        
-        const computedStyle = window.getComputedStyle(testIcon, ':before');
-        const isLoaded = computedStyle.fontFamily.indexOf('Font Awesome') !== -1;
-        
-        document.body.removeChild(testIcon);
-        
-        if (!isLoaded) {
-            // Fallback to emoji icons if Font Awesome fails
-            const iconMap = {
-                'fa-passport': '📋',
-                'fa-university': '🎓', 
-                'fa-file-alt': '📄',
-                'fa-money-bill-wave': '💰',
-                'fa-plane': '✈️',
-                'fa-redo-alt': '🔄',
-                'fa-check-circle': '✅',
-                'fa-eye': '👁️',
-                'fa-user-friends': '👥',
-                'fa-graduation-cap': '🎓',
-                'fa-map-marker-alt': '📍',
-                'fa-phone': '📞',
-                'fa-envelope': '✉️',
-                'fa-clock': '🕒'
-            };
-            
-            document.querySelectorAll('i[class*="fa-"]').forEach(icon => {
-                const classes = icon.className.split(' ');
-                const iconClass = classes.find(cls => cls.startsWith('fa-'));
-                if (iconClass && iconMap[iconClass]) {
-                    icon.innerHTML = iconMap[iconClass];
-                    icon.style.fontFamily = 'inherit';
-                }
-            });
-        }
-    }
-    
-    // Run check after page load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', checkFontAwesome);
-    } else {
-        checkFontAwesome();
-    }
-    </script>
 </body>
 </html>

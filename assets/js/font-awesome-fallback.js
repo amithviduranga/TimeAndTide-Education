@@ -272,13 +272,8 @@
                 font-family: monospace;
             `;
             
-            const updateIndicator = () => {
-                const status = isFontAwesomeLoaded() ? '✅ FA OK' : '❌ FA FAIL';
-                indicator.textContent = status;
-            };
-            
-            document.body.appendChild(indicator);
-            updateIndicator();
+        
+           
             
             // Update every 2 seconds
             setInterval(updateIndicator, 2000);

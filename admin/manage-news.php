@@ -59,7 +59,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_news'])){
     ];
 
     if(isset($_FILES['images']) && !empty(array_filter($_FILES['images']['name']))){
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        // Fallback for servers without fileinfo extension
+        $finfo = class_exists('finfo') ? new finfo(FILEINFO_MIME_TYPE) : null;
 
         foreach($_FILES['images']['name'] as $key => $originalName){
             $tmp_name = $_FILES['images']['tmp_name'][$key];
@@ -78,13 +79,22 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_news'])){
                 continue;
             }
 
-            // Validate MIME using finfo
-            $mimeType = $finfo->file($tmp_name);
+            // Validate MIME using finfo or fallback to extension check
             $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-
-            if(!in_array($mimeType, $allowed_mimes) || !array_key_exists($ext, $allowed_mimes)){
-                $upload_errors[] = "Invalid file type for " . htmlspecialchars($originalName) . ".";
-                continue;
+            
+            if($finfo) {
+                // Use finfo when available
+                $mimeType = $finfo->file($tmp_name);
+                if(!in_array($mimeType, $allowed_mimes) || !array_key_exists($ext, $allowed_mimes)){
+                    $upload_errors[] = "Invalid file type for " . htmlspecialchars($originalName) . ".";
+                    continue;
+                }
+            } else {
+                // Fallback: just check file extension when finfo is not available
+                if(!array_key_exists($ext, $allowed_mimes)){
+                    $upload_errors[] = "Invalid file type for " . htmlspecialchars($originalName) . ".";
+                    continue;
+                }
             }
 
             // Sanitize original name and build unique filename

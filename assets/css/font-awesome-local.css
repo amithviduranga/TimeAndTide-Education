@@ -1,0 +1,66 @@
+/* Local Font Awesome Fallback CSS */
+
+/* Service Icons */
+.fa-passport:before { content: "📋"; font-family: inherit !important; }
+.fa-university:before { content: "🎓"; font-family: inherit !important; }
+.fa-file-alt:before { content: "📄"; font-family: inherit !important; }
+.fa-money-bill-wave:before { content: "💰"; font-family: inherit !important; }
+.fa-plane:before { content: "✈️"; font-family: inherit !important; }
+.fa-redo-alt:before { content: "🔄"; font-family: inherit !important; }
+
+/* Benefit Icons */
+.fa-search:before { content: "🔍"; font-family: inherit !important; }
+.fa-file-signature:before { content: "📝"; font-family: inherit !important; }
+.fa-handshake:before { content: "🤝"; font-family: inherit !important; }
+.fa-chart-line:before { content: "📈"; font-family: inherit !important; }
+.fa-dollar-sign:before { content: "💲"; font-family: inherit !important; }
+
+/* Feature Icons */
+.fa-check-circle:before { content: "✅"; font-family: inherit !important; }
+.fa-eye:before { content: "👁️"; font-family: inherit !important; }
+.fa-user-friends:before { content: "👥"; font-family: inherit !important; }
+.fa-graduation-cap:before { content: "🎓"; font-family: inherit !important; }
+
+/* Contact Icons */
+.fa-map-marker-alt:before { content: "📍"; font-family: inherit !important; }
+.fa-phone:before { content: "📞"; font-family: inherit !important; }
+.fa-envelope:before { content: "✉️"; font-family: inherit !important; }
+.fa-clock:before { content: "🕒"; font-family: inherit !important; }
+
+/* Social Icons */
+.fa-facebook:before { content: "📘"; font-family: inherit !important; }
+.fa-twitter:before { content: "🐦"; font-family: inherit !important; }
+.fa-linkedin:before { content: "💼"; font-family: inherit !important; }
+.fa-instagram:before { content: "📷"; font-family: inherit !important; }
+
+/* Icon sizing for different contexts */
+.service-icon .fa-passport,
+.service-icon .fa-university,
+.service-icon .fa-file-alt,
+.service-icon .fa-money-bill-wave,
+.service-icon .fa-plane,
+.service-icon .fa-redo-alt,
+.benefit-icon .fa-search,
+.benefit-icon .fa-file-signature,
+.benefit-icon .fa-handshake,
+.benefit-icon .fa-chart-line,
+.benefit-icon .fa-dollar-sign {
+    font-size: 1.5rem !important;
+    color: white !important;
+}
+
+/* Ensure icons always display */
+[class*="fa-"]:before {
+    font-style: normal !important;
+    font-variant: normal !important;
+    text-rendering: auto !important;
+    -webkit-font-smoothing: antialiased !important;
+    display: inline-block !important;
+}
+
+/* Force emoji fallback if Font Awesome fails */
+.emoji-fallback {
+    font-family: inherit !important;
+    font-size: 1.5rem !important;
+    line-height: 1 !important;
+}
