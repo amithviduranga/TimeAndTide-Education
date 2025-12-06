@@ -61,15 +61,15 @@
                     </p>
                     <div class="service-hero-stats">
                         <div class="hero-stat-item">
-                            <span class="stat-number">100%</span>
+                            <span class="stat-number" data-count>100%</span>
                             <span class="stat-label">Document Accuracy</span>
                         </div>
                         <div class="hero-stat-item">
-                            <span class="stat-number">500+</span>
+                            <span class="stat-number" data-count>500+</span>
                             <span class="stat-label">Documents Prepared</span>
                         </div>
                         <div class="hero-stat-item">
-                            <span class="stat-number">48hrs</span>
+                            <span class="stat-number" data-count="48">48hrs</span>
                             <span class="stat-label">Average Turnaround</span>
                         </div>
                     </div>
