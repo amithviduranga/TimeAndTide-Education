@@ -5,7 +5,10 @@
       "Bash(git init:*)",
       "Bash(git branch:*)",
       "Bash(git remote add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(for file in pre-departure-support.php news.php success-stories.php documentation.php scholarship-support.php visa-resubmission.php)",
+      "Bash(do)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

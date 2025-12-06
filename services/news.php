@@ -11,8 +11,9 @@ require_once "../admin/db_connect.php";
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
+    <!-- Local Font Awesome (self-hosted) -->
+    <link href="../assets/fonts/fontawesome/all.min.css" rel="stylesheet">
+    
     <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -155,7 +156,7 @@ require_once "../admin/db_connect.php";
                         disableOnInteraction: false,
                     },
                     pagination: {
-                        el: '.swiper-pagination',
+                        el: '.news-pagination-' + i,
                         clickable: true,
                     },
                 });
