@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-
-
     // Mobile menu toggle
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
@@ -21,30 +19,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hero stats counter
     const statNumbers = document.querySelectorAll('.stat-number');
-    statNumbers.forEach(stat => {
-        const count = parseInt(stat.getAttribute('data-count'));
-        const label = stat.nextElementSibling.textContent;
-        let current = 0;
-        const increment = count / 100;
+    const animationDuration = 2000; // 2 seconds
 
-        const updateCount = () => {
-            if (current < count) {
-                current += increment;
-                stat.textContent = Math.ceil(current);
-                requestAnimationFrame(updateCount);
+    const animateCount = (stat, finalCount, label) => {
+        let startTime = null;
+
+        const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = timestamp - startTime;
+            const currentCount = Math.min(Math.floor(progress / animationDuration * finalCount), finalCount);
+
+            stat.textContent = currentCount;
+
+            if (progress < animationDuration) {
+                requestAnimationFrame(step);
             } else {
                 if (label.includes('%')) {
-                    stat.textContent = count + '%';
+                    stat.textContent = finalCount + '%';
                 } else if (label.includes('+')) {
-                    stat.textContent = count + '+';
+                    stat.textContent = finalCount + '+';
                 } else if (label.includes('/7')) {
                     stat.textContent = '24/7';
                 } else {
-                    stat.textContent = count;
+                    stat.textContent = finalCount;
                 }
             }
         };
-        updateCount();
+        requestAnimationFrame(step);
+    };
+
+    statNumbers.forEach(stat => {
+        const finalCount = parseInt(stat.getAttribute('data-count'));
+        const label = stat.nextElementSibling.textContent;
+        animateCount(stat, finalCount, label);
     });
 
     // Modal functionality
@@ -79,5 +86,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-
