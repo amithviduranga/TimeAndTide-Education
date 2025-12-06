@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Awesome Icons Test - Time and Tide Education</title>
+    
+    <!-- Font Awesome with multiple CDN fallbacks -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet" 
+          integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Fallback CDNs -->
+    <link href="https://pro.fontawesome.com/releases/v6.0.0/css/all.css" rel="stylesheet" 
+          integrity="sha384-YcOTlFo6sJOg7g+J+VRpPU6FqKK2LvHJUWdXX/HtLLDMjXqy+i4rJGqhkz/Pc+lF" 
+          crossorigin="anonymous"
+          onerror="this.onerror=null;this.href='https://use.fontawesome.com/releases/v6.7.1/css/all.css';">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/font-awesome-fallback.css">
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+        }
+        
+        .test-section h2 {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .icon-test-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f9fafb;
+        }
+        
+        .icon-test-item i {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: #2563eb;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .icon-info {
+            flex: 1;
+        }
+        
+        .icon-name {
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+        
+        .icon-class {
+            font-family: monospace;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            z-index: 1000;
+        }
+        
+        .test-actions {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .test-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .test-btn:hover {
+            background: #1e40af;
+        }
+        
+        .test-btn.danger {
+            background: #dc2626;
+        }
+        
+        .test-btn.danger:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-indicator" id="status-indicator">
+        ⏳ Checking Font Awesome...
+    </div>
+
+    <div class="test-container">
+        <h1>Font Awesome Icons Test Page</h1>
+        <p>This page tests all Font Awesome icons used on the Time and Tide Education website. Use the buttons below to simulate different loading scenarios.</p>
+        
+        <div class="test-actions">
+            <button class="test-btn" onclick="checkIcons()">Check Icon Status</button>
+            <button class="test-btn" onclick="simulateFailure()">Simulate CDN Failure</button>
+            <button class="test-btn" onclick="applyEmojiFallbacks()">Test Emoji Fallbacks</button>
+            <button class="test-btn" onclick="resetIcons()">Reset Icons</button>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <div class="test-section">
+            <h2>Service Icons</h2>
+            <div class="icon-grid">
+                <div class="icon-test-item">
+                    <i class="fas fa-passport"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Student Visa Support</div>
+                        <div class="icon-class">fas fa-passport</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-university"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">University Placement</div>
+                        <div class="icon-class">fas fa-university</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Documentation Support</div>
+                        <div class="icon-class">fas fa-file-alt</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Scholarship Support</div>
+                        <div class="icon-class">fas fa-money-bill-wave</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-plane"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Pre-departure Support</div>
+                        <div class="icon-class">fas fa-plane</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-redo-alt"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Visa Resubmission</div>
+                        <div class="icon-class">fas fa-redo-alt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Feature Icons</h2>
+            <div class="icon-grid">
+                <div class="icon-test-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">High Success Rate</div>
+                        <div class="icon-class">fas fa-check-circle</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-eye"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">100% Transparency</div>
+                        <div class="icon-class">fas fa-eye</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-user-friends"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Personalized Guidance</div>
+                        <div class="icon-class">fas fa-user-friends</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Experienced Counselors</div>
+                        <div class="icon-class">fas fa-graduation-cap</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Contact Icons</h2>
+            <div class="icon-grid">
+                <div class="icon-test-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Address</div>
+                        <div class="icon-class">fas fa-map-marker-alt</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Phone</div>
+                        <div class="icon-class">fas fa-phone</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Email</div>
+                        <div class="icon-class">fas fa-envelope</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Office Hours</div>
+                        <div class="icon-class">fas fa-clock</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Social Media Icons</h2>
+            <div class="icon-grid">
+                <div class="icon-test-item">
+                    <i class="fab fa-facebook"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Facebook</div>
+                        <div class="icon-class">fab fa-facebook</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fab fa-twitter"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Twitter</div>
+                        <div class="icon-class">fab fa-twitter</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fab fa-linkedin"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">LinkedIn</div>
+                        <div class="icon-class">fab fa-linkedin</div>
+                    </div>
+                </div>
+                <div class="icon-test-item">
+                    <i class="fab fa-instagram"></i>
+                    <div class="icon-info">
+                        <div class="icon-name">Instagram</div>
+                        <div class="icon-class">fab fa-instagram</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/font-awesome-fallback.js"></script>
+    <script>
+        function checkIcons() {
+            if (typeof window.checkFontAwesome === 'function') {
+                window.checkFontAwesome();
+            } else {
+                console.log('Font Awesome checker not available');
+            }
+        }
+
+        function simulateFailure() {
+            // Remove Font Awesome stylesheets to simulate failure
+            const faLinks = document.querySelectorAll('link[href*="font-awesome"], link[href*="fontawesome"]');
+            faLinks.forEach(link => link.disabled = true);
+            
+            // Update status
+            updateStatus('❌ CDN Simulated Failure - Fallbacks Active');
+            
+            setTimeout(() => {
+                location.reload();
+            }, 3000);
+        }
+
+        function applyEmojiFallbacks() {
+            // Add emoji fallback class to all icons
+            const icons = document.querySelectorAll('i[class*="fa-"]');
+            const emojiMap = {
+                'fa-passport': '🛂',
+                'fa-university': '🏛️',
+                'fa-file-alt': '📄',
+                'fa-money-bill-wave': '💰',
+                'fa-plane': '✈️',
+                'fa-redo-alt': '↻',
+                'fa-check-circle': '✓',
+                'fa-eye': '👁️',
+                'fa-user-friends': '👥',
+                'fa-graduation-cap': '🎓',
+                'fa-map-marker-alt': '📍',
+                'fa-phone': '📞',
+                'fa-envelope': '📧',
+                'fa-clock': '🕐',
+                'fa-facebook': 'f',
+                'fa-twitter': 't',
+                'fa-linkedin': 'in',
+                'fa-instagram': 'ig'
+            };
+
+            icons.forEach(icon => {
+                const classes = icon.className.split(' ');
+                const iconClass = classes.find(cls => cls.startsWith('fa-'));
+                
+                if (iconClass && emojiMap[iconClass]) {
+                    icon.textContent = emojiMap[iconClass];
+                    icon.style.fontFamily = 'inherit';
+                    icon.style.fontWeight = 'normal';
+                    icon.classList.add('icon-emoji-fallback');
+                }
+            });
+
+            updateStatus('😊 Emoji Fallbacks Applied');
+        }
+
+        function resetIcons() {
+            location.reload();
+        }
+
+        function updateStatus(message) {
+            const indicator = document.getElementById('status-indicator');
+            if (indicator) {
+                indicator.textContent = message;
+            }
+        }
+
+        // Initial status update
+        setTimeout(() => {
+            if (typeof window.checkFontAwesome === 'function') {
+                window.checkFontAwesome();
+                updateStatus('✅ Font Awesome System Ready');
+            } else {
+                updateStatus('⚠️ Fallback System Loading...');
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
